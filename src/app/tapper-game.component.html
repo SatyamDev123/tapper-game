@@ -1,0 +1,44 @@
+<header class="tapper-game-toolbar">
+  <h3>Tapper Game</h3>
+</header>
+<div class="tapper-game-container">
+   <p class="p-title-val">{{result.match_result}}</p>
+   <section class="tapper-game">
+     <article class="tapper-game-action">
+       <button *ngIf="!result.active" class="tg-btn-tapper" (click)="startGame()">
+         Start Game
+       </button>
+       <button *ngIf="result.restart_btn_toggle" class="tg-btn-tapper" (click)="restartGame()">
+         Restart Game
+       </button>
+       <div class="timer-container" *ngIf="result.active">
+         <p class="p-title timer-title">Time Left in seconds</p>
+         <p class="p-title-val timer-progress">{{result.timerProgress}}</p>
+       </div>
+    </article>
+      <section class="tapper-game-content">
+        <div class="tapper-game-content-tap tap-left">
+           <article class="tap-left-score">
+             <p class="p-title">Score:</p>
+             <p class="p-title-val palyer-score">{{result.score.player1}}</p>
+           </article>
+           <button class="btn-round tg-btn-tapper" (click)="tapLeft()" [disabled]="!result.active">Player 1</button>
+        </div>
+        <div class="tapper-game-content-tap tap-right">
+          <article class="tap-left-score">
+            <p class="p-title">Score:</p>
+            <p class="p-title-val palyer-score">{{result.score.player2}}</p>
+          </article>
+         <button class="btn-round tg-btn-tapper" (click)="tapRight()" [disabled]="!result.active">Player 2 </button>
+        </div>
+      </section>
+   </section>
+   <!-- <section class="tapper-game">
+       <ul *ngFor="let item of items | async">
+            <li>
+               {{item.message}}
+            </li>
+       </ul>
+   </section> -->
+</div>
+<!-- <h1>This is test</h1> -->
