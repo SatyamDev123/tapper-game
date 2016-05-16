@@ -14,7 +14,6 @@ export class TapperGameAppComponent {
   results: FirebaseListObservable<any[]>;
   key: string;
 
-  toggleRestartBtn = false;
   result = {
     timerProgress: 10,
     score: {
@@ -45,16 +44,12 @@ export class TapperGameAppComponent {
     if(this.key) {
       this.result.score.player1++;
       this.results.update(this.key, this.result);
-    } else {
-      //TODO: click on start btn
     }
   }
   tapRight() {
     if(this.key){
       this.result.score.player2++;
       this.results.update(this.key, this.result);
-    } else {
-      //TODO: click on start btn
     }
   }
 
@@ -66,25 +61,26 @@ export class TapperGameAppComponent {
         player2:0
       },
       match_result: '',
-      active: false,
+      active: true,
       restart_btn_toggle: false
     };
     this.startGame();
   }
 
   startGame() {
+    this.result.active = true;
     this.results.push(this.result).then((snapshot)=>{
-      this.result.active = true;
       const inteval = setInterval(()=>{
             if(this.result.timerProgress === 0){
               clearInterval(inteval);
+              let score = this.result.score;
               this.result.restart_btn_toggle=true;
-              if(this.result.score.player1 > this.result.score.player2) {
+              if(score.player1 > score.player2) {
                 this.result.match_result = 'Player 1 Won the match';
-              } else if (this.result.score.player1 < this.result.score.player2) {
+              } else if (score.player1 < score.player2) {
                 this.result.match_result = 'Player 2 Won the match';
-              }else if (this.result.score.player1 === this.result.score.player2) {
-                this.result.match_result = 'Draw';
+              }else if (score.player1 === score.player2) {
+                this.result.match_result = 'Match Draw';
               }
               this.results.update(this.key, this.result);
             } else {
