@@ -31,9 +31,6 @@ export class TapperGameAppComponent {
     this.results._ref.on("child_added", (snapshot)=> {
       this.key = snapshot.key();
     });
-    this.results._ref.on("child_added", (snapshot)=> {
-      this.key = snapshot.key();
-    });
     this.results._ref.on("child_changed", (snapshot)=> {
       let changed_result = snapshot.val();
       this.result = changed_result;
